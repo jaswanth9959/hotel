@@ -4,14 +4,14 @@ const users = [
   {
     firstName: "user",
     lastName: "1",
-    email: "john@gmail.com",
+    email: "user@gmail.com",
     phone: "1234567890",
     password: bcrypt.hashSync("123456", 10),
   },
   {
     firstName: "user",
     lastName: "2",
-    email: "jane@gmail.com",
+    email: "user2@gmail.com",
     phone: "1234567890",
     password: bcrypt.hashSync("123456", 10),
   },
