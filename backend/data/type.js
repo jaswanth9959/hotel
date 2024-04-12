@@ -1,2 +1,2 @@
-const roomType = [{ name: "outdoor" }, { name: "indoor" }, { name: "cactus" }];
+const roomType = [{ name: "Delux" }, { name: "Suite" }, { name: "Studio" }];
 export default roomType;
