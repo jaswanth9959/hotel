@@ -4,7 +4,6 @@ const rooms = [
     description: "Cozy single room with a comfortable bed and basic amenities.",
     image: "/images/1.jpg",
     price: 50,
-    category: "Standard",
     maxpeople: 1,
   },
   {
@@ -14,7 +13,6 @@ const rooms = [
     image: "/images/2.jpg",
 
     price: 100,
-    category: "Deluxe",
     maxpeople: 2,
   },
   {
@@ -24,12 +22,8 @@ const rooms = [
     image: "/images/3.jpg",
 
     price: 200,
-    category: "Suite",
     maxpeople: 4,
-    unavailableDates: [
-      "2024-03-23T19:06:38.932+00:00",
-      "2024-03-24T19:06:38.932+00:00",
-    ],
+   
   },
   {
     title: "Executive Suite",
@@ -38,12 +32,8 @@ const rooms = [
     image: "/images/1.jpg",
 
     price: 300,
-    category: "Suite",
     maxpeople: 2,
-    unavailableDates: [
-      "2024-03-23T19:06:38.932+00:00",
-      "2024-03-24T19:06:38.932+00:00",
-    ],
+   
   },
   {
     title: "Ocean View Room",
@@ -52,12 +42,8 @@ const rooms = [
     image: "/images/3.jpg",
 
     price: 150,
-    category: "Premium",
     maxpeople: 2,
-    unavailableDates: [
-      "2024-03-23T19:06:38.932+00:00",
-      "2024-03-24T19:06:38.932+00:00",
-    ],
+    
   },
   {
     title: "Presidential Suite",
