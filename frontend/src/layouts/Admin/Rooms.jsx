@@ -29,6 +29,11 @@ function Rooms() {
         <h2 className="text-center my-4">
           <strong>Rooms</strong>
         </h2>
+        <LinkContainer to="/admin/addroom">
+          <Button variant="dark" className="m-3">
+            Add New Room
+          </Button>
+        </LinkContainer>
         {isLoading ? (
           <p>Loading...</p>
         ) : error ? (

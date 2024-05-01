@@ -30,6 +30,9 @@ function Employee() {
         <h2 className="text-center my-4">
           <strong>Staff</strong>
         </h2>
+        <LinkContainer to="/admin/addstaff">
+          <Button variant="dark">Add Staff</Button>
+        </LinkContainer>
         {isLoading ? (
           <p>Loading...</p>
         ) : error ? (

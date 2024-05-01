@@ -44,7 +44,7 @@ function StaffAdd() {
   return (
     <Row className="justify-content-md-center mt-5">
       <Col md={6}>
-        <LinkContainer to="/admindashboard">
+        <LinkContainer to="/admin/staff">
           <Button variant="dark">Back</Button>
         </LinkContainer>
         <div className="login-container mt-3">

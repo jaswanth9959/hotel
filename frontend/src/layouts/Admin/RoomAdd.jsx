@@ -54,7 +54,7 @@ function RoomAdd() {
   return (
     <Row className="justify-content-md-center mt-5">
       <Col md={6}>
-        <LinkContainer to="/admindashboard">
+        <LinkContainer to="/admin/rooms">
           <Button variant="dark">Back</Button>
         </LinkContainer>
         {isLoading ? (
@@ -145,6 +145,7 @@ function RoomAdd() {
                   value={roomType}
                   onChange={(e) => setRoomType(e.target.value)}
                 >
+                  <option>Select</option>
                   {types?.map((x) => (
                     <option key={x._id} value={x._id}>
                       {x.name}
