@@ -5,6 +5,7 @@ import Room from "../components/Room";
 import { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 const Home = () => {
+  const max = JSON.parse(localStorage.getItem("max"));
   const dates = JSON.parse(localStorage.getItem("dates"));
   const fromDate = new Date(dates[0].startDate).toLocaleDateString("en-US");
   const toDate = new Date(dates[0].endDate).toLocaleDateString("en-US");
@@ -39,6 +40,7 @@ const Home = () => {
 
     return daysDifference;
   }
+  console.log(max);
 
   const numOfDays = calcDays(dates[0].startDate, dates[0].endDate);
 
@@ -52,9 +54,12 @@ const Home = () => {
   //filter
   const [sortBy, setSortBy] = useState("all");
   let filteredRooms;
-  if (sortBy === "all") filteredRooms = rooms;
-  else {
-    filteredRooms = rooms.filter((x) => x.roomType.name === sortBy);
+  if (sortBy === "all") {
+    filteredRooms = rooms?.filter((x) => x.maxpeople > max);
+  } else {
+    filteredRooms = rooms?.filter(
+      (x) => x.roomType.name === sortBy && x.maxpeople > max
+    );
   }
 
   return (
@@ -70,7 +75,8 @@ const Home = () => {
           </LinkContainer>
           <h1 className="text-center">Rooms</h1>
           <h4 className="text-center mt-4 mb-4">
-            From: {fromDate} - To: {toDate} ({numOfDays} Days)
+            From: {fromDate} - To: {toDate} ({numOfDays} Days) Number Of Guests:{" "}
+            {max}
           </h4>
           <Row className="mt-4 mb-4 justify-content-md-center">
             <Col md={8}>

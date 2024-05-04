@@ -1,6 +1,14 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import {
+  Row,
+  Col,
+  ListGroup,
+  Image,
+  Button,
+  Card,
+  Form,
+} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import {
@@ -9,6 +17,7 @@ import {
   usePayReservationMutation,
   useCancelReservationMutation,
   useUpdateStatusMutation,
+  useExtraChargeMutation,
 } from "../slices/reservationSlice";
 function ReservationScreen() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -23,6 +32,7 @@ function ReservationScreen() {
   const [updateStatus, { isLoading: loadingstatus }] =
     useUpdateStatusMutation();
 
+  const [extraCharge, { isLoading: loadingExtra }] = useExtraChargeMutation();
   const [payReservation, { isLoading: loadingPay }] =
     usePayReservationMutation();
 
@@ -30,6 +40,11 @@ function ReservationScreen() {
     useCancelReservationMutation();
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+
+  const [card, setCard] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [a, setA] = useState(0);
 
   const {
     data: paypal,
@@ -80,6 +95,19 @@ function ReservationScreen() {
       window.alert(err?.data?.message || err.message);
     }
   };
+
+  async function onApproveTest() {
+    await payReservation({ reservationId, details: { payer: {} } });
+    refetch();
+
+    window.alert("payment successful");
+  }
+  async function onApproveTest2() {
+    await extraCharge({ reservationId, details: { amount: a } });
+    refetch();
+
+    window.alert("payment successful");
+  }
   function createOrder(data, actions) {
     return actions.order
       .create({
@@ -150,8 +178,8 @@ function ReservationScreen() {
                         <strong>{reservation.checkOutDate}</strong>
                       </h6>
                       <h6 className="py-1">
-                        CheckIn Time: <strong>11:00 AM</strong>- CheckOut Time:{" "}
-                        <strong>01:00 PM</strong>
+                        CheckIn Time: <strong>03:00 PM</strong>- CheckOut Time:{" "}
+                        <strong>11:00 AM</strong>
                       </h6>
                       <h6 className="py-1">
                         Reservation Status:{" "}
@@ -165,17 +193,30 @@ function ReservationScreen() {
                             {reservation.reservationStatus}
                           </strong>
                         )}
-                        {reservation.reservationStatus === "CheckedIn" && (
-                          <strong style={{ color: "green" }}>
-                            {reservation.reservationStatus}
-                          </strong>
-                        )}
-                        {reservation.reservationStatus === "CheckedOut" && (
-                          <strong style={{ color: "orange" }}>
-                            {reservation.reservationStatus}
-                          </strong>
-                        )}
                       </h6>
+                      {reservation.checkInAt && (
+                        <strong style={{ color: "green" }}>
+                          CheckedIn at{" "}
+                          {new Date(reservation?.checkInAt).toLocaleDateString(
+                            "en-US"
+                          )}{" "}
+                          {new Date(reservation.checkInAt).toLocaleTimeString(
+                            "en-US"
+                          )}
+                        </strong>
+                      )}
+                      <br></br>
+                      {reservation.checkOutAt && (
+                        <strong style={{ color: "orange" }}>
+                          {reservation.reservationStatus} at{" "}
+                          {new Date(reservation.checkOutAt).toLocaleDateString(
+                            "en-US"
+                          )}{" "}
+                          {new Date(reservation.checkOutAt).toLocaleTimeString(
+                            "en-US"
+                          )}
+                        </strong>
+                      )}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -229,12 +270,107 @@ function ReservationScreen() {
                   <Col>${reservation.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {reservation.extraCharge !== 0 && (
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Extra Charge</Col>
+                    <Col>${reservation.extraCharge}</Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
               {reservation.reservationStatus === "Reserved" &&
                 reservation.isPaid && (
                   <>
                     <Button onClick={onApprovetest}>Cancel</Button>
                     {loadingCancel && <p>Canceling...</p>}
                   </>
+                )}
+
+              {reservation.reservationStatus === "CheckedIn" &&
+                reservation.extraCharge === 0 && (
+                  <ListGroup.Item>
+                    {loadingPay && <p>Loading...</p>}
+                    {isPending ? (
+                      <p>Loading...</p>
+                    ) : (
+                      <div>
+                        <div>
+                          <Form.Group
+                            controlId="formBasicSSn"
+                            className="form-group"
+                          >
+                            {" "}
+                            {/* Add className */}
+                            <Form.Label className="form-label">
+                              Extra Charge Amount
+                            </Form.Label>{" "}
+                            {/* Add className */}
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter Amount"
+                              value={a}
+                              onChange={(e) => setA(e.target.value)}
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            controlId="formBasicSSn"
+                            className="form-group"
+                          >
+                            {" "}
+                            {/* Add className */}
+                            <Form.Label className="form-label">
+                              Card Number
+                            </Form.Label>{" "}
+                            {/* Add className */}
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter Card Number"
+                              value={card}
+                              onChange={(e) => setCard(e.target.value)}
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            controlId="formBasicSSn"
+                            className="form-group"
+                          >
+                            {" "}
+                            {/* Add className */}
+                            <Form.Label className="form-label">
+                              CVV
+                            </Form.Label>{" "}
+                            {/* Add className */}
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter CVV"
+                              value={cvv}
+                              onChange={(e) => setCvv(e.target.value)}
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            controlId="formBasicSSn"
+                            className="form-group"
+                          >
+                            {" "}
+                            {/* Add className */}
+                            <Form.Label className="form-label">
+                              Expiry
+                            </Form.Label>{" "}
+                            {/* Add className */}
+                            <Form.Control
+                              type="text"
+                              placeholder="Valid Thru"
+                              value={expiry}
+                              onChange={(e) => setExpiry(e.target.value)}
+                            />
+                          </Form.Group>
+
+                          <Button variant="dark" onClick={onApproveTest2}>
+                            Pay
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </ListGroup.Item>
                 )}
               {!reservation.isPaid && (
                 <ListGroup.Item>
@@ -244,11 +380,61 @@ function ReservationScreen() {
                   ) : (
                     <div>
                       <div>
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        ></PayPalButtons>
+                        <Form.Group
+                          controlId="formBasicSSn"
+                          className="form-group"
+                        >
+                          {" "}
+                          {/* Add className */}
+                          <Form.Label className="form-label">
+                            Card Number
+                          </Form.Label>{" "}
+                          {/* Add className */}
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter Card Number"
+                            value={card}
+                            onChange={(e) => setCard(e.target.value)}
+                          />
+                        </Form.Group>
+                        <Form.Group
+                          controlId="formBasicSSn"
+                          className="form-group"
+                        >
+                          {" "}
+                          {/* Add className */}
+                          <Form.Label className="form-label">
+                            CVV
+                          </Form.Label>{" "}
+                          {/* Add className */}
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter CVV"
+                            value={cvv}
+                            onChange={(e) => setCvv(e.target.value)}
+                          />
+                        </Form.Group>
+                        <Form.Group
+                          controlId="formBasicSSn"
+                          className="form-group"
+                        >
+                          {" "}
+                          {/* Add className */}
+                          <Form.Label className="form-label">
+                            Expiry
+                          </Form.Label>{" "}
+                          {/* Add className */}
+                          <Form.Control
+                            type="text"
+                            placeholder="Valid Thru"
+                            value={expiry}
+                            onChange={(e) => setExpiry(e.target.value)}
+                          />
+                        </Form.Group>
+
+                        <Button variant="dark" onClick={onApproveTest}>
+                          Pay
+                        </Button>
                       </div>
                     </div>
                   )}

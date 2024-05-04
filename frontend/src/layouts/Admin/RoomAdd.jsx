@@ -71,11 +71,11 @@ function RoomAdd() {
               <Form.Group controlId="formBasicEmail2" className="form-group">
                 {" "}
                 {/* Add className */}
-                <Form.Label className="form-label">Title</Form.Label>{" "}
+                <Form.Label className="form-label">Room Number</Form.Label>{" "}
                 {/* Add className */}
                 <Form.Control
                   type="text"
-                  placeholder="Enter Room Title"
+                  placeholder="Enter Room Number"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />

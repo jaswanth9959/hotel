@@ -81,7 +81,7 @@ function Room() {
                   </ListGroup.Item>
 
                   <ListGroup.Item>
-                    <strong>Price:</strong> ${room.price} per night
+                    <strong>Price:</strong> ${room.price} per Day
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <strong>Description:</strong> {room.description}
@@ -93,10 +93,10 @@ function Room() {
                   <ListGroup.Item>
                     <Row>
                       <Col>
-                        <strong>CheckIn Time:</strong> 10:00AM
+                        <strong>CheckIn Time:</strong> 03:00PM
                       </Col>
                       <Col>
-                        <strong>CheckOut Time:</strong> 01:00PM
+                        <strong>CheckOut Time:</strong> 11:00AM
                       </Col>
                     </Row>
                   </ListGroup.Item>

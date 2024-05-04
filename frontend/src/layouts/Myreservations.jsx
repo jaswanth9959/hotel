@@ -63,7 +63,7 @@ function Myreservations() {
                       </strong>
                     )}
                   </td>
-                  <td>{item.paidAt}</td>
+                  <td>{new Date(item.paidAt).toLocaleDateString("en-US")}</td>
                   <td>
                     <Link to={`/reservation/${item._id}`}>
                       <Button variant="dark">View Details</Button>

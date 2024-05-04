@@ -14,7 +14,9 @@ function StaffEdit() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [ssn, setSsn] = useState("");
-
+  const [zip, setZip] = useState("");
+  const [city, setCity] = useState("");
+  const [dob, setDob] = useState("");
   const { data: staff, isLoading, error } = useGetStaffByIDQuery(staffId);
   const [updateStaff, { isLoading: loadingUpdate }] = useUpdateStaffMutation();
 
@@ -28,6 +30,9 @@ function StaffEdit() {
         email,
         ssn,
         phone,
+        zip,
+        city,
+        dob,
       }).unwrap();
       navigate("/admin/staff");
     } catch (err) {
@@ -42,6 +47,9 @@ function StaffEdit() {
       setEmail(staff.email);
       setSsn(staff.ssn);
       setPhone(staff.phone);
+      setCity(staff.city);
+      setZip(staff.zip);
+      setDob(staff.dob);
     }
   }, [staff]);
   return (
@@ -119,6 +127,42 @@ function StaffEdit() {
                   placeholder="Enter Last Name"
                   value={ssn}
                   onChange={(e) => setSsn(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicSSn" className="form-group">
+                {" "}
+                {/* Add className */}
+                <Form.Label className="form-label">DOB</Form.Label>{" "}
+                {/* Add className */}
+                <Form.Control
+                  type="text"
+                  placeholder="Enter DOB"
+                  value={dob}
+                  onChange={(e) => setDob(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicSSn" className="form-group">
+                {" "}
+                {/* Add className */}
+                <Form.Label className="form-label">City</Form.Label>{" "}
+                {/* Add className */}
+                <Form.Control
+                  type="text"
+                  placeholder="Enter City"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicSSn" className="form-group">
+                {" "}
+                {/* Add className */}
+                <Form.Label className="form-label">Zip</Form.Label>{" "}
+                {/* Add className */}
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Zip"
+                  value={zip}
+                  onChange={(e) => setZip(e.target.value)}
                 />
               </Form.Group>
 

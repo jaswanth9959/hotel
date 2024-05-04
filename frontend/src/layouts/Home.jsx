@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCalendar } from "react-icons/fa";
-import { Container, Carousel, Button, Image, Row, Col } from "react-bootstrap";
+import {
+  Container,
+  Carousel,
+  Button,
+  Image,
+  Row,
+  Col,
+  Form,
+} from "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -41,9 +49,11 @@ function HomeScreen() {
       key: "selection",
     },
   ]);
+  const [max, setMax] = useState(1);
 
   const handleSelect = () => {
     localStorage.setItem("dates", JSON.stringify(dates));
+    localStorage.setItem("max", JSON.stringify(max));
     navigate("/rooms");
   };
 
@@ -51,7 +61,7 @@ function HomeScreen() {
     <Container className="py-3">
       <Row className="justify-content-center pb-3">
         <Col
-          md={{ span: 8, offset: 1 }}
+          md={{ span: 8 }}
           className="text-center pt-2"
           style={{ border: "2px solid black", borderRadius: "5px" }}
         >
@@ -77,6 +87,20 @@ function HomeScreen() {
               />
             )}
           </div>
+        </Col>
+        <Col md={1}>
+          <Form.Group controlId="formBasicSSn" className="form-group">
+            {" "}
+            {/* Add className */}
+            <Form.Label className="form-label">Num Of Guests</Form.Label>{" "}
+            {/* Add className */}
+            <Form.Control
+              type="text"
+              placeholder=""
+              value={max}
+              onChange={(e) => setMax(e.target.value)}
+            />
+          </Form.Group>
         </Col>
         <Col md={{ span: 2 }} className="text-center">
           <Button variant="dark" onClick={handleSelect}>

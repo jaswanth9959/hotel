@@ -41,27 +41,27 @@ function Employee() {
           <Table bordered style={{ border: "2px solid black" }}>
             <thead>
               <tr>
-                <th>Staff ID</th>
+                {/* <th>Staff ID</th> */}
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>SSN</th>
                 <th>Role</th>
-                <th>Action</th>
+                {/* <th>Action</th> */}
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user._id}>
-                  <td>{user._id}</td>
+                  {/* <td>{user._id}</td> */}
                   <td>{user?.firstName}</td>
                   <td> {user?.lastName}</td>
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
                   <td>{user.ssn}</td>
                   <td>{user.role}</td>
-                  <td>
+                  {/* <td>
                     <>
                       <LinkContainer to={`/staff/${user._id}`}>
                         <Button className="btn-sm mx-1" variant="dark">
@@ -77,7 +77,7 @@ function Employee() {
                       </Button>
                       {loadingDelete && <p>Loading...</p>}
                     </>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>

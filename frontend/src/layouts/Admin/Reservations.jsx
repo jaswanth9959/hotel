@@ -32,7 +32,7 @@ function Reservations() {
           <Table bordered style={{ border: "2px solid black" }}>
             <thead>
               <tr>
-                <th>Reservation ID</th>
+                {/* <th>Reservation ID</th> */}
                 <th>Customer Date</th>
                 <th>Received Date</th>
                 <th>Type</th>
@@ -45,11 +45,15 @@ function Reservations() {
             <tbody>
               {reservations.map((reservation) => (
                 <tr key={reservation._id}>
-                  <td>{reservation._id}</td>
+                  {/* <td>{reservation._id}</td> */}
                   <td>
                     {reservation?.user?.firstName} {reservation?.user?.lastName}
                   </td>
-                  <td>{reservation?.createdAt.substring(0, 10)}</td>
+                  <td>
+                    {new Date(reservation.createdAt).toLocaleDateString(
+                      "en-US"
+                    )}
+                  </td>
                   <td>{reservation.reservationType}</td>
                   <td>{reservation.totalPrice}</td>
 
@@ -69,7 +73,11 @@ function Reservations() {
                   </td>
                   <td>
                     {reservation.isPaid ? (
-                      reservation?.paidAt?.substring(0, 10)
+                      <>
+                        {new Date(reservation.paidAt).toLocaleDateString(
+                          "en-US"
+                        )}
+                      </>
                     ) : (
                       <p style={{ color: "red" }}> NO</p>
                     )}

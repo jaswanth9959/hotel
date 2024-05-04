@@ -9,6 +9,9 @@ const staff = [
     phone: "1234567890",
     role: "admin",
     password: bcrypt.hashSync("123456", 10),
+    city: "leee",
+    zip: "43212",
+    dob: "05/06/1998",
   },
   {
     firstName: "staff",
@@ -17,6 +20,9 @@ const staff = [
     ssn: "12345679",
     phone: "1234567890",
     password: bcrypt.hashSync("123456", 10),
+    city: "leee",
+    zip: "43212",
+    dob: "05/06/1998",
   },
 ];
 

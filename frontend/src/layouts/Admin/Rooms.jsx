@@ -42,8 +42,8 @@ function Rooms() {
           <Table bordered style={{ border: "2px solid black" }}>
             <thead>
               <tr>
-                <th>Room ID</th>
-                <th>Title</th>
+                {/* <th>Room ID</th> */}
+                <th>Room Number</th>
                 <th>Room Type</th>
                 <th>Price</th>
                 <th>Action</th>
@@ -52,7 +52,7 @@ function Rooms() {
             <tbody>
               {rooms.map((room) => (
                 <tr key={room._id}>
-                  <td>{room._id}</td>
+                  {/* <td>{room._id}</td> */}
                   <td>{room.title}</td>
                   <td>{room.roomType.name}</td>
                   <td>${room.price}/per night</td>
@@ -64,13 +64,13 @@ function Rooms() {
                           Edit
                         </Button>
                       </LinkContainer>
-                      <Button
+                      {/* <Button
                         className="btn-sm mx-1"
                         variant="danger"
                         onClick={() => deleteHandler(room._id)}
                       >
                         Delete
-                      </Button>
+                      </Button> */}
                       {loadingDelete && <p>Loading...</p>}
                     </>
                   </td>

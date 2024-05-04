@@ -77,17 +77,17 @@ function RoomEdit() {
           <div className="login-container mt-3">
             {" "}
             {/* Add className */}
-            <h2 className="login-heading">Staff Edit Form</h2>{" "}
+            <h2 className="login-heading">Room Edit Form</h2>{" "}
             {/* Add className */}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="formBasicEmail2" className="form-group">
                 {" "}
                 {/* Add className */}
-                <Form.Label className="form-label">Title</Form.Label>{" "}
+                <Form.Label className="form-label">Room Number</Form.Label>{" "}
                 {/* Add className */}
                 <Form.Control
                   type="text"
-                  placeholder="Enter Room Title"
+                  placeholder="Enter Room Number"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />

@@ -30,6 +30,13 @@ export const reservationApiSlice = apiSlice.injectEndpoints({
         body: details,
       }),
     }),
+    extraCharge: builder.mutation({
+      query: ({ reservationId, details }) => ({
+        url: `${RESERVATION_URL}/${reservationId}/extra`,
+        method: "PUT",
+        body: details,
+      }),
+    }),
     cancelReservation: builder.mutation({
       query: (reservationId) => ({
         url: `${RESERVATION_URL}/${reservationId}/cancel`,
@@ -75,4 +82,5 @@ export const {
   usePayReservationMutation,
   useGetReservationsQuery,
   useUpdateStatusMutation,
+  useExtraChargeMutation,
 } = reservationApiSlice;

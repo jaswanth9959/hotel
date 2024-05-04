@@ -27,6 +27,19 @@ const employeeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    city: {
+      type: String,
+    },
+    zip: {
+      type: String,
+    },
+    dob: {
+      type: String,
+    },
+    first: {
+      type: Boolean,
+      default: true,
+    },
     role: {
       type: String,
       required: true,

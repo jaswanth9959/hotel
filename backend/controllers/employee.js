@@ -30,6 +30,10 @@ const loginStaff = asyncHandler(async (req, res) => {
       role: staff.role,
       ssn: staff.ssn,
       phone: staff.phone,
+      zip: staff.zip,
+      city: staff.city,
+      dob: staff.dob,
+      first: staff.first,
       token,
     });
   } else {
@@ -80,6 +84,9 @@ const updateStaff = asyncHandler(async (req, res) => {
     staff.email = req.body.email || staff.email;
     staff.ssn = req.body.ssn || staff.ssn;
     staff.phone = req.body.phone || staff.phone;
+    staff.zip = req.body.zip || staff.zip;
+    staff.city = req.body.city || staff.city;
+    staff.dob = req.body.dob || staff.dob;
     const updateStaff = await staff.save();
     res.status(200).json({
       _id: updateStaff._id,
@@ -99,11 +106,15 @@ const updateStaffProfile = asyncHandler(async (req, res) => {
   const user = await Employee.findById(req.params.id);
 
   if (user) {
+    user.first = false;
     user.firstname = req.body.firstname || user.firstname;
     user.lastname = req.body.lastname || user.lastname;
     user.email = req.body.email || user.email;
     user.ssn = req.body.ssn || user.ssn;
     user.phone = req.body.phone || user.phone;
+    user.zip = req.body.zip || user.zip;
+    user.city = req.body.city || user.city;
+    user.dob = req.body.dob || user.dob;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -127,7 +138,8 @@ const updateStaffProfile = asyncHandler(async (req, res) => {
 });
 
 const registerStaff = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password, ssn, phone } = req.body;
+  const { firstName, lastName, email, password, ssn, phone, zip, city, dob } =
+    req.body;
 
   const staff = await Employee.create({
     firstName,
@@ -135,6 +147,9 @@ const registerStaff = asyncHandler(async (req, res) => {
     email,
     password,
     phone,
+    zip,
+    city,
+    dob,
     role: "staff",
     ssn,
   });
@@ -146,6 +161,9 @@ const registerStaff = asyncHandler(async (req, res) => {
     role: staff.role,
     phone: staff.phone,
     ssn: staff.ssn,
+    zip: staff.zip,
+    dob: staff.dob,
+    city: staff.city,
   });
 });
 

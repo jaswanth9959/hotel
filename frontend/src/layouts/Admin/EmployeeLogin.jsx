@@ -18,7 +18,7 @@ function StaffLogin() {
 
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
-  const redirect = sp.get("redirect") || "/";
+  const redirect = sp.get("redirect") || "/staffprofile";
 
   useEffect(() => {
     if (userInfo) {

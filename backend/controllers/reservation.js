@@ -159,6 +159,20 @@ const updateStatus = asyncHandler(async (req, res) => {
   }
 });
 
+const addExtra = asyncHandler(async (req, res) => {
+  const reservation = await Reservation.findById(req.params.id);
+  const { amount } = req.body;
+  if (reservation) {
+    reservation.extraCharge = amount;
+    const updatedReservation = await reservation.save();
+
+    res.json(updatedReservation);
+  } else {
+    res.status(404);
+    throw new Error("Reservation not found");
+  }
+});
+
 const updateReservationToPaid = asyncHandler(async (req, res) => {
   const reservation = await Reservation.findById(req.params.id);
   const { id, status, update_time, email_address } = req.body;
@@ -200,4 +214,5 @@ export {
   getAllReservations,
   createCounterReservation,
   updateStatus,
+  addExtra,
 };

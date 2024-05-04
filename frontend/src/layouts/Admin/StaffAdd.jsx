@@ -13,7 +13,9 @@ function StaffAdd() {
   const [ssn, setSsn] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [zip, setZip] = useState("");
+  const [city, setCity] = useState("");
+  const [dob, setDob] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,6 +34,9 @@ function StaffAdd() {
           email,
           ssn,
           password,
+          zip,
+          city,
+          dob,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate("/admin/staff");
@@ -113,6 +118,42 @@ function StaffAdd() {
                 placeholder="Enter Social Security Number"
                 value={ssn}
                 onChange={(e) => setSsn(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicSSn" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">DOB</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter DOB"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicSSn" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">City</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicSSn" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">Zip</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter Zip"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
               />
             </Form.Group>
             <Form.Group controlId="formBasicPassword" className="form-group">

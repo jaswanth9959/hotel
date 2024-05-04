@@ -72,6 +72,10 @@ const reservationSchema = mongoose.Schema(
     checkOutAt: {
       type: Date,
     },
+    extraCharge: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
