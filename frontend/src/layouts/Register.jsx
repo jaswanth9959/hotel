@@ -12,6 +12,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
+  const [dob, setDob] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,6 +45,9 @@ function Register() {
           phone,
           email,
           password,
+          dob,
+          city,
+          zip,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate(redirect);
@@ -107,6 +113,42 @@ function Register() {
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPhone" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">DOB</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter DOB"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPhone" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">City</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPhone" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">Zip</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter Zip"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
               />
             </Form.Group>
 

@@ -11,6 +11,10 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
+  const [dob, setDob] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -23,7 +27,10 @@ function Profile() {
     setLastName(userInfo.lastName);
     setEmail(userInfo.email);
     setPhone(userInfo.phone);
-  }, [userInfo.email, userInfo.firstName, userInfo.lastName, userInfo.phone]);
+    setCity(userInfo.city);
+    setDob(userInfo.dob);
+    setZip(userInfo.zip);
+  }, [userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -39,6 +46,9 @@ function Profile() {
           email,
           phone,
           password,
+          zip,
+          city,
+          dob,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         window.alert("Profile updated successfully");
@@ -105,6 +115,42 @@ function Profile() {
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPhone" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">DOB</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter DOB"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPhone" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">City</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPhone" className="form-group">
+              {" "}
+              {/* Add className */}
+              <Form.Label className="form-label">Zip</Form.Label>{" "}
+              {/* Add className */}
+              <Form.Control
+                type="text"
+                placeholder="Enter Zip"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
               />
             </Form.Group>
 

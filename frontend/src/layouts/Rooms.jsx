@@ -55,10 +55,10 @@ const Home = () => {
   const [sortBy, setSortBy] = useState("all");
   let filteredRooms;
   if (sortBy === "all") {
-    filteredRooms = rooms?.filter((x) => x.maxpeople > max);
+    filteredRooms = rooms?.filter((x) => x.maxpeople >= max);
   } else {
     filteredRooms = rooms?.filter(
-      (x) => x.roomType.name === sortBy && x.maxpeople > max
+      (x) => x.roomType.name === sortBy && x.maxpeople >= max
     );
   }
 

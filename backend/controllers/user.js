@@ -3,7 +3,8 @@ import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password, phone } = req.body;
+  const { firstName, lastName, email, password, phone, city, zip, dob } =
+    req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -18,6 +19,9 @@ const registerUser = asyncHandler(async (req, res) => {
     phone,
     email,
     password,
+    city,
+    zip,
+    dob,
   });
 
   if (user) {
@@ -43,6 +47,9 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       phone: user.phone,
       role: "user",
+      city: user.city,
+      zip: user.zip,
+      dob: user.dob,
       token,
     });
   } else {
@@ -78,6 +85,9 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
       role: user.role,
       phone: user.phone,
+      city: user.city,
+      zip: user.zip,
+      dob: user.dob,
       token,
     });
   } else {
@@ -120,6 +130,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.lastName = req.body.lastName || user.lastName;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
+    user.city = req.body.city || user.city;
+    user.zip = req.body.zip || user.zip;
+    user.dob = req.body.dob || user.dob;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -133,6 +146,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       phone: updatedUser.phone,
       role: updatedUser.role,
+      city: updatedUser.city,
+      zip: updatedUser.zip,
+      dob: updatedUser.dob,
+
       token: req.body.token,
     });
   } else {

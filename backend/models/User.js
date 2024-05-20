@@ -27,6 +27,15 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "user",
     },
+    city: {
+      type: String,
+    },
+    zip: {
+      type: String,
+    },
+    dob: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
