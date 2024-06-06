@@ -24,9 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 connectDB();
-app.get("/", (req, res) => {
-  res.send("api running");
-});
+
 app.use("/api/rooms", roomRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/employee", employeeRoutes);
