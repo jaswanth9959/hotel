@@ -162,7 +162,7 @@ function ReservationScreen() {
                   <Row>
                     <Col md={4}>
                       <Image
-                        src={`http://localhost:5000${reservation.reservation.image}`}
+                        src={reservation.reservation.image}
                         alt={reservation.reservation.title}
                         fluid
                         rounded
