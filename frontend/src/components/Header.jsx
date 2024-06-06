@@ -36,7 +36,7 @@ function Header() {
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
-              <strong>HMS</strong>
+              <strong>EZ-Stay</strong>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
