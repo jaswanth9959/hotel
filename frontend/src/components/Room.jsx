@@ -12,7 +12,7 @@ function Room({ room, available }) {
       <ListGroup.Item>
         <Row>
           <Col md={6}>
-            <Image src={`http://localhost:5000${room.image}`} fluid />
+            <Image src={room.image} fluid />
           </Col>
           <Col md={6}>
             <h1>{room.title}</h1>
