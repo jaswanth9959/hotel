@@ -66,7 +66,7 @@ function Room() {
             <Col md={{ span: 5 }}>
               <Card className="p-2">
                 <Card.Img
-                  src={`http://localhost:5000${room.image}`}
+                  src={room.image}
                   alt={room.title}
                 />
               </Card>
