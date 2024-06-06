@@ -73,7 +73,7 @@ function Confirm() {
           <Col md={5}>
             <Card className="p-2">
               <Image
-                src={`http://localhost:5000${cartItems.image}`}
+                src={cartItems.image}
                 alt={cartItems.title}
                 fluid
                 rounded
